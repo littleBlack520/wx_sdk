@@ -1,6 +1,6 @@
 <?php
 header('Content-type: application/json;charset=utf8');
-class Wxsdk{
+class WxSdk{
     const APPID = "your APPID"; //设置你自己的APPID
     const APPSECRET = "your APPSECRET"; //设置你自己的APPSECRET
     //为了安全，用md5随机生成两个文件名。
@@ -27,13 +27,19 @@ class Wxsdk{
          //这里URL需要动态获取，否则会出错。
          $url = $_SERVER['HTTP_REFERER'];
          $data = "jsapi_ticket=${jsapi_ticket}&noncestr=${noncestr}&timestamp=${timestamp}&url=${url}";
-        $signature = sha1($data);
-        echo  json_encode([
+         $signature = sha1($data);
+         $json  = json_encode([
             'nonceStr'=>$noncestr,
             'signature'=>$signature,
             'timestamp'=> $timestamp,
             'appId'=>self::APPID,
         ]);
+        if($_GET['callback']){
+          echo $_GET['callback'].'('.$json.')';
+        }else{
+          echo $json;
+        }
+
 
     }
     /**
@@ -162,4 +168,4 @@ class Wxsdk{
 
 }
 //实例化。
-new Wxsdk();
+new WxSdk();
