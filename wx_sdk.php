@@ -169,3 +169,4 @@ class WxSdk{
 }
 //实例化。
 new WxSdk();
+echo phpinfo();
