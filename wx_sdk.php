@@ -171,3 +171,4 @@ class WxSdk{
 new WxSdk();
 echo phpinfo();
 echo 'hello';
+echo 'world'
